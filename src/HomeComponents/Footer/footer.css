@@ -1,0 +1,30 @@
+footer{
+    background: black;
+
+    padding: 20px;
+}
+footer .row
+{
+    margin-right: 15px;
+    margin-left: 15px;
+}
+
+.footer-text
+{
+    color: #fff;
+    font-size: 18px;
+    line-height: 30px;
+    font-family: 'Oswald', sans-serif;
+    text-align: left;
+}
+.timework
+{
+    color: #fbd629;
+    font-size: 24px;
+    line-height: 35px;
+    margin-top: 10px !important;
+}
+.copyright
+{
+    text-align: center;
+}

@@ -1,0 +1,59 @@
+@media only screen and (max-width: 850px)
+{
+
+  .container{
+    padding: 0;
+  }
+
+    .card .card-img-top {
+        width:60px;
+    }
+    .card-group {
+        flex-direction: row;
+        flex-wrap:  wrap;
+    }
+    .container-hair-style
+    {
+        position: relative;
+    }
+
+    .group-image
+    {
+        width: 100%;
+    }
+    .button-left
+    {
+        position: absolute;
+        top: 25%;
+        right: 90%;
+    }
+    .button-right
+    {
+        position: absolute;
+        top: 25%;
+        left: 90%;
+    }
+    .media-group
+    {
+        width: 100%;
+        display: grid;
+     grid-template-columns: 50% 50%;
+      grid-template-rows: 278px 278px;
+    }
+    .group-image-store
+    {
+        width: 50%;
+    }
+    .commitment
+    {
+        flex-direction: column;
+    }
+    .circle
+    {
+        width: 80px !important;
+        height: 80px;
+    }
+
+    
+
+}
