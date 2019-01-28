@@ -1,5 +1,6 @@
 import * as types from '../constants/ActionsTypes';
-import {loginUser,registerUser} from '../../APIs/usersAPI'
+import {loginUser,registerUser, showAllPost, DeletePost} from '../../APIs/usersAPI'
+import * as messages from '../constants/Message'
 const actionLogin = (data) =>
 {   
 
@@ -41,3 +42,55 @@ export const signUpUser = (dispatch) =>
     }
     
 }
+
+const posts = (data) =>
+{
+    return {
+        type: types.SHOW_ALL_POST,
+        payload: data
+    }
+}
+export const showBlogPost = (dispatch) =>
+{
+  return async () =>
+  {
+    let listPosts = await showAllPost();
+    dispatch(posts(listPosts))
+  } 
+}
+
+
+
+
+const notify = () =>
+{
+    return{
+        type: types.DELETE_A_BLOGPOST_SUCCESS,
+        payload: messages.REMOVE_BLOGPOST_SUCCESS
+    }
+}
+const refreshMessage =() => {
+    return{
+        type: types.REFRESH_MESSAGE,
+    }
+}
+export const deleteABlogPost = (dispatch) =>
+{
+  return async (id, tokenKey) =>
+  {
+    let removeBlogPost =  await DeletePost(id, tokenKey);
+    if(removeBlogPost.result === true)
+    {
+        dispatch(notify());
+        setTimeout(() =>
+        {
+            dispatch(refreshMessage())
+        }, 3000) 
+        
+    }
+    let listPosts = await showAllPost();
+    console.log(listPosts,'banh kep bong lan ')
+    dispatch(posts(listPosts))
+  } 
+}
+

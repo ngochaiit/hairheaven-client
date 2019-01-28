@@ -10,6 +10,7 @@ const LoginReducer = (state = initialState, action) =>
 switch(action.type) {
 
     case(types.LOGIN_ACTION):
+    console.log(action.payload, '12345454')
         
         return {
                     ...state,

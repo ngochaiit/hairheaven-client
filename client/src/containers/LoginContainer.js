@@ -7,7 +7,9 @@ class LoginContainer extends Component {
  
  render() {
      var {login,loadUser} = this.props;
-     console.log(login); 
+     
+     console.log('dumb');
+     
     return (
         <Login loadUser={loadUser} login ={login}/>
     );
