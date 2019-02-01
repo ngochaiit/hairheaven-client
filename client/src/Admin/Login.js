@@ -58,12 +58,14 @@ class Login extends Component {
     
 
     if ( this.checkBtn.context._errors.length === 0 ) {
-        alert(`Verify Sucessfull. Your Email is: ${email}. Your Password is: ${password}`);
-      await loadUser(email, password);
+        alert(`Your Email is: ${email}. Your Password is: ${password}`);
+     await loadUser(email, password);
       let {login} = this.props;
+      console.log(login,'login');
       
       
-      if(login!=={})
+      
+      if(login.result === true)
       {
         
         this.props.history.push('/');
@@ -75,6 +77,17 @@ class Login extends Component {
       
     }
     
+}
+
+renderNotify = () =>
+{
+  if(this.props.messageFail !== '')
+  {
+    console.log(this.props.messageFail)
+    return <div class="alert alert-warning">
+    <strong>Warning!</strong> {this.props.messageFail}
+  </div>
+  }
 }
 
 
@@ -111,7 +124,7 @@ class Login extends Component {
         <button type="submit" className="btn btn-primary login-button" >LOGIN</button>
         <CheckButton style={{ display: 'none' }} ref={c => { this.checkBtn = c }} />
         </Form>
-
+        {this.renderNotify()}
         </div>
     );
   }

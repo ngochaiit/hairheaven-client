@@ -4,8 +4,45 @@ import {showBlogPost} from '../../redux/actions/index'
 import {
  SERVER_NAME,
   SERVER_PORT,
- } from '../../APIs/apiParameters'
+ } from '../../APIs/apiParameters';
+ import withStyle from 'react-jss';
 
+ const styles =
+   {
+    imgCss : {
+     border: '1px solid #ddd',
+     borderRadius: '4px',
+     padding: '5px,',
+     width: '150px',
+     height: 'auto'
+
+    },
+    container: 
+    {
+      display: 'flex',
+      padding: '20px'
+
+    },
+    BlogPostTitle: 
+    {
+      fontSize: '20px',
+      fontFamily: 'Sarabun',
+      paddingLeft: '10px',
+      textTransform: 'uppercase',
+      fontWeight: '700',
+      color: '#2e2d2d'
+    },
+    BlogPostContent:
+    {
+      fontSize: '16px',
+      fontFamily: 'Oswald',
+      paddingLeft: '10px',
+      paddingTop: '20px',
+      fontWeight: '300',
+      color: '#A9A9A9'
+    }
+   }
+ 
 class Content extends Component {
 
   componentDidMount()
@@ -18,7 +55,7 @@ class Content extends Component {
   
   
   render() {
-
+    let {classes} = this.props;
     const renderNew = () =>
     { 
       let {blogPosts} = this.props;
@@ -27,34 +64,11 @@ class Content extends Component {
       if(blogPosts.data)
       {
         return blogPosts.data.slice(blogPosts.data.length-4,blogPosts.data.length);
+       
       }
       return [];
     }
-  // const renderNew = () =>
-  // { 
-  //   let {blogPosts} = this.props;
-  //  if(blogPosts.length > 0)
-  //  {
-  //   let listmap =  blogPosts.data.map((blogPost,index) =>
-  //   {
-  //     if(index >= blogPosts.lengh -4)
-  //     {
-  //       return(
-  //       <div key = {index}>
-  //         <div className = 'image'><img src ={blogPost.urlImage}/></div>
-  //         <div className = 'blogPost'>
-  //         <div className ='titleBlogPost'>{blogPost.title}</div>
-  //         <div className = 'contentBlogPost'>{blogPost.content}</div>
-  //         </div>
-  //       </div>
-  //       )
-  //     }
-  //   })
 
-  //   return listmap;
-  //  }
-  //  return;
-  // }
     return (
       <section>
           <h1>Hair Heaven Tin Tuc</h1>
@@ -62,11 +76,11 @@ class Content extends Component {
               <div className ="container-news">
               {
                 renderNew().map((newpost,i)=> (
-                  <div key = {i}>
-                  <div className = 'image'><img src ={`${SERVER_NAME}:${SERVER_PORT}/blogposts/sendfile/${newpost.urlImage}`} alt="abc" /></div> 
+                  <div key = {i} className = {classes.container}>
+                  <div className = 'image'><img src ={`${SERVER_NAME}:${SERVER_PORT}/blogposts/sendfile/${newpost.urlImage}`} alt="abc" className = {classes.imgCss} /></div> 
                   <div className = 'blogPost'>
-                    <div className ='titleBlogPost'>{newpost.title}</div>
-                    <div className = 'contentBlogPost'>{newpost.content}</div>
+                    <div className ={classes.BlogPostTitle}>{newpost.title}</div>
+                    <div className = {classes.BlogPostContent}>{newpost.content}</div>
                   </div>
                   </div>
                 ))
@@ -98,4 +112,4 @@ const mapDispatchToProps= (dispatch) =>
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Content);
+export default connect(mapStateToProps, mapDispatchToProps)(withStyle(styles)(Content));

@@ -10,14 +10,40 @@ const actionLogin = (data) =>
     }
 }
 
+const MessageLogin = () =>
+{
+    return {
+        type: types.LOGIN_ACTION_FAILED,
+        payload : messages.LOGIN_SUCCESS_FAILED
+    }
+}
+const refreshMessage =() => {
+    return{
+        type: types.REFRESH_MESSAGE,
+    }
+}
+
 export const loadUser =  (dispatch)=> {
     return async (username, password)=> {
             console.log(username,"action");
+           
             
             let data = await loginUser(username,password)
             console.log(data,'return data');
+            if(data.result === true)
+            {
+              dispatch(actionLogin(data))
+                
+            }
+            else{
+               await dispatch(MessageLogin())
+                setTimeout(() =>
+        {
+            dispatch(refreshMessage())
+        }, 2000) 
+            }
+         
             
-            dispatch(actionLogin(data))
             
     }
 }
@@ -69,11 +95,7 @@ const notify = () =>
         payload: messages.REMOVE_BLOGPOST_SUCCESS
     }
 }
-const refreshMessage =() => {
-    return{
-        type: types.REFRESH_MESSAGE,
-    }
-}
+
 export const deleteABlogPost = (dispatch) =>
 {
   return async (id, tokenKey) =>
@@ -85,7 +107,7 @@ export const deleteABlogPost = (dispatch) =>
         setTimeout(() =>
         {
             dispatch(refreshMessage())
-        }, 3000) 
+        }, 5000) 
         
     }
     let listPosts = await showAllPost();

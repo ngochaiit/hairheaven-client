@@ -2,7 +2,8 @@ import * as types from '../constants/ActionsTypes'
 
 var initialState = {
     user : {},
-    signUpSuccess: {}
+    signUpSuccess: {},
+    message: '',
 
 }
 const LoginReducer = (state = initialState, action) =>
@@ -23,6 +24,18 @@ switch(action.type) {
             ...state,
             signUpSuccess: action.payload
         }
+    case(types.LOGIN_ACTION_FAILED):
+    return{
+        ...state,
+        message: action.payload
+    }
+    case(types.REFRESH_MESSAGE):
+    {
+        return{
+            ...state,
+            message: ''
+        }
+    }
     
     
     default: return state;

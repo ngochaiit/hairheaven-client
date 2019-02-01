@@ -1,29 +1,27 @@
 import React, { Component } from 'react';
 import {createNewBlogPost} from '../APIs/usersAPI'
+import { EditorState } from 'draft-js';
+import { Editor } from 'react-draft-wysiwyg';
+
+import '../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
 
 class BlogPosts extends Component {
-    // constructor() {
-    //     super();
-    //     this.state = {
-    //         content: '',
-
-    //     };
-    //       this.handleEditorChange = this.handleEditorChange.bind(this);
-
-    // }
-
-    // handleEditorChange(e){
-    //     console.log('Content was updated:', e.target.getContent());
-    //     this.setState({content: e.target.getContent()});
-    //   }
-
+   
+state = {
+    editorState: EditorState.createEmpty(),
+}
+onEditorStateChange = (editorState) => {
+    this.setState({
+      editorState,
+    });
+  };
     async onSubmit(e){
         e.preventDefault();
         let target = e.target;
         let title = target.title.value;
-        let content = target.content.value;
-        console.log(content)
+        let content = JSON.stringify(target.content.value);
+       
         let file = e.target.urlImage.files[0];
 
         let tokenKey = sessionStorage.getItem('tokenKey');
@@ -33,7 +31,12 @@ class BlogPosts extends Component {
             alert('insert database success');
         }
 }
+getCurrentContent = (e) =>
+{
+    console.log(e)
+}
   render() {
+    const { editorState } = this.state;
     return (
         <div className="col-lg-12">
         <form onSubmit={e => this.onSubmit(e)}  method = 'POST' >
@@ -50,7 +53,22 @@ class BlogPosts extends Component {
             </div>
             <div className="form-group">
                 <label>Content</label>
-                <textarea className="form-control mytextarea" rows="3"  name = 'content'  />
+                {/* <textarea className="form-control mytextarea" rows="3"  name = 'content'  /> */}
+                <div>
+        <Editor
+        wrapperClassName="wrapper-class"
+        editorClassName="editor-class"
+        toolbarClassName="toolbar-class"
+          editorState={editorState}
+          
+          onEditorStateChange={this.onEditorStateChange}
+        />
+        <textarea style = {{width: '100%', height: '300px'}}
+        
+          name = 'content'
+        />
+      </div>
+                
             </div>    
             <button type="submit" className="btn btn-primary">Submit Button</button>
             <button type="reset" className="btn btn-success">Reset Button</button>

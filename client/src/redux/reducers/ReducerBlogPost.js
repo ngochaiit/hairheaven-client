@@ -4,7 +4,7 @@ var initialState = {
     blogPosts: [],
     message: ''
 
-}
+}                                                                                                                                                                                                          
 const BlogPostReducer = (state = initialState, action) =>
 {
 switch(action.type) {

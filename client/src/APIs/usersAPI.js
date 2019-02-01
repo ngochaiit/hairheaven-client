@@ -85,12 +85,12 @@ export const loginUser = async (email, password) =>
         }
         else if(responseJson.result ==='failed'){
            
-            return  new APIResponse(null, responseJson.message, false)
+            return  new APIResponse(null, responseJson.message,null, false)
         }
     }
     catch(error)
     {
-        return new APIResponse(null, error.message, false)
+        return new APIResponse(null, error.message,null, false)
 
     }
 }

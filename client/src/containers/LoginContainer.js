@@ -6,12 +6,13 @@ import {loadUser} from '../redux/actions/index'
 class LoginContainer extends Component {
  
  render() {
-     var {login,loadUser} = this.props;
+     var {login,loadUser, messageFail} = this.props;
      
-     console.log('dumb');
+     console.log(login,'dumb');
+     console.log(messageFail,'123345')
      
     return (
-        <Login loadUser={loadUser} login ={login}/>
+        <Login loadUser={loadUser} login ={login} messageFail = {messageFail}/>
     );
   }
 }
@@ -22,12 +23,14 @@ class LoginContainer extends Component {
 const mapStateToProps = state =>
 {
   return{
-    login : state.LoginReducer.user
+    login : state.LoginReducer.user,
+    messageFail: state.LoginReducer.message,
   }
 }
 const mapDispatchToProps = dispatch => {
   return {
-    loadUser : loadUser(dispatch)
+    loadUser : loadUser(dispatch),
+   
   }
 }
 
