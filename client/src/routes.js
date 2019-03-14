@@ -6,7 +6,7 @@ import RegisterContainer from './containers/RegisterContainer'
 import BlogPost from './Admin/BlogPost'
 import BlogPostList from './Admin/BlogPostList'
 import BlogPostEdit from './Admin/BlogPostEdit'
-
+import PageBlogPost from './Admin/PageBlogPost'
 
 const routes = [
     {
@@ -41,6 +41,12 @@ const routes = [
     exact: false,
     main: () => <BlogPostEdit/>
     },
+    {
+        path:'/news/:id',
+        exact: false,
+        main: () => <PageBlogPost/>
+        },
+    
     {
         path: '',
         exact: false,

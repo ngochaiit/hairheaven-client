@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Carousel from './header/Carousel'
 import {  Route, Link,  } from "react-router-dom";
 import './header.css'
 import {connect} from 'react-redux'
@@ -115,7 +114,6 @@ class Header extends Component {
 
     
          
-      <Carousel/>
 
        </header>
     

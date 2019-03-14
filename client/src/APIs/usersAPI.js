@@ -18,6 +18,7 @@ const API_BLOG_POST = `${SERVER_NAME}:${SERVER_PORT}/blogposts/newpost`
 const API_SHOW_BLOGPOST = `${SERVER_NAME}:${SERVER_PORT}/blogposts/showallpost`
 const API_DELETE_BLOGPOST = `${SERVER_NAME}:${SERVER_PORT}/blogposts/delete`
 const API_UPDATE_BLOGPOST = `${SERVER_NAME}:${SERVER_PORT}/blogposts/update`
+const API_FIND_BLOGPOST_BY_ID =`${SERVER_NAME}:${SERVER_PORT}/blogposts/detailBlogPost`
 
 
 
@@ -96,11 +97,12 @@ export const loginUser = async (email, password) =>
 }
 
 
-export const createNewBlogPost = async (title, content,file, tokenKey) =>
+export const createNewBlogPost = async (title,intro, content,file, tokenKey) =>
 {
     try{
         let form = new FormData();
         form.append("title",title);
+        form.append("intro", intro);
         form.append("content",content);
         form.append("urlImage",file);
         let response = await fetch(API_BLOG_POST, {
@@ -221,6 +223,46 @@ export const updatePost = async (idBlogPost,title, content,file, tokenKey) =>
             headers: {
                 
                 'x-access-token': tokenKey
+            }
+        })
+
+        let responseJson = await response.json()
+        console.log(responseJson)
+        
+        if (responseJson.result === 'ok')
+        {
+            
+            return new APIResponse(
+                responseJson.data,
+                responseJson.message,null, true
+            )
+        }
+        else if(responseJson.result ==='failed'){
+           
+            return new APIResponse(
+                null,
+                responseJson.message, null, false
+            )
+        }
+    }
+    catch(error)
+    {
+        return new APIResponse(null, error.message, null, false)
+
+    }
+}
+
+
+
+
+export const findBlogPosts = async (idBlogPost) =>
+{
+    try{
+        let response = await fetch(`${API_FIND_BLOGPOST_BY_ID}?id=${idBlogPost}` , {
+            method: 'GET',
+            headers: {
+                'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
+
             }
         })
 

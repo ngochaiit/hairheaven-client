@@ -2,7 +2,8 @@ import * as types from '../constants/ActionsTypes'
 
 var initialState = {
     blogPosts: [],
-    message: ''
+    message: '',
+    detailPosts:[]
 
 }                                                                                                                                                                                                          
 const BlogPostReducer = (state = initialState, action) =>
@@ -29,6 +30,14 @@ switch(action.type) {
         return{
             ...state,
             message: ""
+        }
+    }
+    case(types.LOAD_BLOGPOST_ACTION):
+    {
+        return{
+            ...state,
+            detailPosts: action.payload
+
         }
     }
     

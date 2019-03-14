@@ -20,11 +20,11 @@ class BlogPostList extends Component {
       let {BlogPostObject} = this.props;
       
       let tokenKey = sessionStorage.getItem('tokenKey');
-        console.log(tokenKey)
+        
       
       const listPosts = () =>
       {   
-          console.log()
+         
           if(BlogPostObject.data){
             let posts = BlogPostObject.data.map((blogPost,index) =>
             {
@@ -45,7 +45,7 @@ class BlogPostList extends Component {
           } 
           return;
       }
-      console.log(this.props.DltMes);
+      
       
     return(
        <div>

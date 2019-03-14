@@ -6,6 +6,7 @@ import {
   SERVER_PORT,
  } from '../../APIs/apiParameters';
  import withStyle from 'react-jss';
+ import {Link} from 'react-router-dom'
 
  const styles =
    {
@@ -59,7 +60,8 @@ class Content extends Component {
     const renderNew = () =>
     { 
       let {blogPosts} = this.props;
-      console.log(blogPosts);
+      console.log(blogPosts)
+     
       
       if(blogPosts.data)
       {
@@ -79,8 +81,10 @@ class Content extends Component {
                   <div key = {i} className = {classes.container}>
                   <div className = 'image'><img src ={`${SERVER_NAME}:${SERVER_PORT}/blogposts/sendfile/${newpost.urlImage}`} alt="abc" className = {classes.imgCss} /></div> 
                   <div className = 'blogPost'>
+                    <Link to = {`/news/${newpost._id}`}>
                     <div className ={classes.BlogPostTitle}>{newpost.title}</div>
-                    <div className = {classes.BlogPostContent}>{newpost.content}</div>
+                   </Link>
+                   <div className = {classes.BlogPostContent}>{newpost.intro}</div>
                   </div>
                   </div>
                 ))

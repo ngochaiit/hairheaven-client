@@ -1,5 +1,5 @@
 import * as types from '../constants/ActionsTypes';
-import {loginUser,registerUser, showAllPost, DeletePost} from '../../APIs/usersAPI'
+import {loginUser,registerUser, showAllPost, DeletePost,findBlogPosts } from '../../APIs/usersAPI'
 import * as messages from '../constants/Message'
 const actionLogin = (data) =>
 {   
@@ -116,3 +116,21 @@ export const deleteABlogPost = (dispatch) =>
   } 
 }
 
+const loadBlogPost = (data) =>
+{   
+
+    return  {
+        type : types.LOAD_BLOGPOST_ACTION,
+        payload : data
+    }
+}
+
+export const blogPostDetail = (dispatch) =>
+{
+    return async (idBlogPost) =>
+    {
+        let blogPost = await findBlogPosts(idBlogPost)
+        dispatch(loadBlogPost(blogPost))
+    }
+
+}

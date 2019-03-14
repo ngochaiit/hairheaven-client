@@ -3,7 +3,8 @@ import { BrowserRouter as Router, Route,  Switch } from "react-router-dom";
 import './App.css';
 import Header from './HomeComponents/Header'; 
 import './responsive.css';
-import routes from './routes'
+import routes from './routes';
+
 
 
 
@@ -13,7 +14,6 @@ class App extends Component {
       <Router>
         <div className = 'content'>
         <Header></Header>
-
         {/*Noi dung */}
         {/*Noi dung router */}
     <Switch>
